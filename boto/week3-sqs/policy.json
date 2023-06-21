@@ -1,0 +1,15 @@
+{
+   "TargetValue":10,
+   "CustomizedMetricSpecification":{
+      "MetricName":"SQSQueueMessagesVisible",
+      "Namespace":"AWS/SQS",
+      "Dimensions":[
+         {
+            "Name":"QueueName ",
+            "Value":"test"
+         }
+      ],
+      "Statistic":"Average",
+      "Unit":"None"
+   }
+}
