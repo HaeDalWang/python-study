@@ -1,7 +1,10 @@
+from fastapi import FastAPI
 import os
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+
+app = FastAPI()
 
 # RDS Endpoint
 HOST="database-1.cluster-cl1bwfxhbgy4.ap-northeast-2.rds.amazonaws.com"
@@ -34,7 +37,16 @@ def create_database(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
 
-## Main
-if __name__ == "__main__":
-    ## 연결
+
+@app.get("/apiv2/conn")
+async def root():
     conn = create_server_connection(HOST,USER,PASSWORD)
+    message = {"host" : conn.server_host,
+               "id" : conn.connection_id,
+               "dd": conn._cnx_pool}
+    return message
+
+# ## Main
+# if __name__ == "__main__":
+#     ## 연결
+#     conn = create_server_connection(HOST,USER,PASSWORD)
